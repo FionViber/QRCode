@@ -1,0 +1,617 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>QR Code Tool</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f5f7f5;
+      --panel: #ffffff;
+      --panel-soft: #fbfcfb;
+      --text: #17211b;
+      --muted: #66736a;
+      --line: #dfe7df;
+      --line-strong: #c8d6cc;
+      --primary: #00a13b;
+      --primary-dark: #008c33;
+      --danger: #b42318;
+      --good: #087d46;
+      --shadow: 0 16px 48px rgba(23, 33, 27, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      min-height: 100%;
+      background: var(--bg);
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", sans-serif;
+      letter-spacing: 0;
+    }
+
+    button,
+    textarea,
+    select,
+    input {
+      font: inherit;
+      letter-spacing: 0;
+    }
+
+    main {
+      width: min(1260px, calc(100vw - 32px));
+      margin: 0 auto;
+      padding: 28px 0 34px;
+    }
+
+    .title-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin: 0;
+    }
+
+    h1 {
+      font-size: 28px;
+      line-height: 1.2;
+      font-weight: 780;
+    }
+
+    .workspace,
+    .records-section {
+      display: grid;
+      grid-template-columns: minmax(0, 1.08fr) minmax(360px, 0.92fr);
+      gap: 16px;
+      align-items: stretch;
+    }
+
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+    }
+
+    .panel-head {
+      min-height: 58px;
+      padding: 16px 18px;
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+    }
+
+    h2 {
+      font-size: 17px;
+      line-height: 1.3;
+      font-weight: 740;
+    }
+
+    h3 {
+      font-size: 15px;
+      line-height: 1.3;
+      font-weight: 720;
+      margin-bottom: 12px;
+    }
+
+    .meta {
+      color: var(--muted);
+      font-size: 13px;
+      white-space: nowrap;
+    }
+
+    .language-control {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex: 0 0 auto;
+    }
+
+    .language-control label {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 680;
+      white-space: nowrap;
+    }
+
+    .language-control select {
+      min-width: 132px;
+    }
+
+    .generator-body {
+      padding: 18px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.35fr) minmax(290px, 0.75fr);
+      gap: 16px;
+      min-height: 526px;
+    }
+
+    .input-column,
+    .preview-column {
+      min-width: 0;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 9px;
+      font-size: 13px;
+      font-weight: 680;
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 338px;
+      resize: vertical;
+      border: 1px solid var(--line-strong);
+      border-radius: 8px;
+      background: var(--panel-soft);
+      color: var(--text);
+      padding: 13px;
+      outline: none;
+      font: 14px/1.65 ui-monospace, SFMono-Regular, Menlo, Consolas, "Microsoft YaHei", monospace;
+    }
+
+    textarea:focus,
+    select:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(0, 161, 59, 0.12);
+    }
+
+    .settings {
+      max-width: 220px;
+      margin-top: 12px;
+    }
+
+    select {
+      width: 100%;
+      min-height: 40px;
+      border: 1px solid var(--line-strong);
+      border-radius: 8px;
+      background: #fff;
+      color: var(--text);
+      padding: 0 10px;
+      outline: none;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+      align-items: center;
+    }
+
+    button,
+    .download-link {
+      appearance: none;
+      border: 1px solid transparent;
+      border-radius: 8px;
+      min-height: 40px;
+      padding: 0 15px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      color: #fff;
+      background: var(--primary);
+      font-size: 14px;
+      font-weight: 680;
+      text-decoration: none;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    button:hover,
+    .download-link:hover {
+      background: var(--primary-dark);
+    }
+
+    button.secondary,
+    .download-link.secondary {
+      color: var(--text);
+      background: #fff;
+      border-color: var(--line-strong);
+    }
+
+    button.secondary:hover,
+    .download-link.secondary:hover {
+      background: #f0f5f0;
+    }
+
+    button.danger {
+      color: var(--danger);
+      background: #fff;
+      border-color: #f2c8c4;
+    }
+
+    button.danger:hover {
+      background: #fff4f3;
+    }
+
+    button:disabled,
+    .download-link[aria-disabled="true"] {
+      opacity: 0.55;
+      cursor: not-allowed;
+    }
+
+    .qr-stage {
+      border: 1px dashed var(--line-strong);
+      border-radius: 8px;
+      min-height: 338px;
+      display: grid;
+      place-items: center;
+      padding: 16px;
+      background:
+        linear-gradient(45deg, #f7faf7 25%, transparent 25%),
+        linear-gradient(-45deg, #f7faf7 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, #f7faf7 75%),
+        linear-gradient(-45deg, transparent 75%, #f7faf7 75%);
+      background-size: 22px 22px;
+      background-position: 0 0, 0 11px, 11px -11px, -11px 0;
+    }
+
+    #qrCanvas {
+      width: min(100%, 320px);
+      height: auto;
+      aspect-ratio: 1;
+      background: #fff;
+      image-rendering: pixelated;
+      display: none;
+    }
+
+    .empty {
+      color: var(--muted);
+      text-align: center;
+      line-height: 1.6;
+      padding: 0 18px;
+    }
+
+    .status {
+      min-height: 22px;
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .status.good {
+      color: var(--good);
+    }
+
+    .status.error {
+      color: var(--danger);
+    }
+
+    .decoder {
+      min-height: 604px;
+      display: grid;
+      grid-template-rows: auto 1fr;
+    }
+
+    .decoder-body {
+      padding: 18px;
+    }
+
+    .subpanel {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px;
+      background: var(--panel-soft);
+    }
+
+    .dropzone {
+      min-height: 430px;
+      border: 1px dashed #b9c9bd;
+      border-radius: 8px;
+      background: #fff;
+      display: grid;
+      place-items: center;
+      color: var(--muted);
+      text-align: center;
+      cursor: pointer;
+      padding: 18px;
+    }
+
+    .dropzone.active {
+      border-color: var(--primary);
+      background: #f0fbf3;
+      color: var(--primary-dark);
+    }
+
+    input[type="file"] {
+      display: none;
+    }
+
+    .records-section {
+      margin-top: 16px;
+    }
+
+    .record-column {
+      min-width: 0;
+      padding: 14px;
+    }
+
+    .record-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      min-height: 40px;
+      margin-bottom: 12px;
+    }
+
+    .record-head .actions {
+      margin: 0;
+    }
+
+    .record-head button {
+      min-height: 34px;
+      padding: 0 11px;
+      font-size: 13px;
+    }
+
+    .record-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .record-item {
+      min-width: 0;
+      border: 1px solid #e7eee9;
+      border-radius: 8px;
+      padding: 11px;
+      background: #fff;
+    }
+
+    .record-meta {
+      color: var(--muted);
+      font-size: 12px;
+      margin-bottom: 7px;
+    }
+
+    .record-text {
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      font: 13px/1.55 ui-monospace, SFMono-Regular, Menlo, Consolas, "Microsoft YaHei", monospace;
+    }
+
+    .record-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .record-actions button,
+    .record-actions .download-link {
+      min-height: 34px;
+      padding: 0 11px;
+      font-size: 13px;
+    }
+
+    .records-empty {
+      min-height: 118px;
+      border: 1px dashed var(--line);
+      border-radius: 8px;
+      display: grid;
+      place-items: center;
+      color: var(--muted);
+      text-align: center;
+      background: #fff;
+      padding: 14px;
+    }
+
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: 22px;
+      transform: translateX(-50%) translateY(14px);
+      min-height: 40px;
+      max-width: min(560px, calc(100vw - 32px));
+      padding: 9px 14px;
+      border-radius: 8px;
+      background: rgba(23, 33, 27, 0.92);
+      color: #fff;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 160ms ease, transform 160ms ease;
+      z-index: 20;
+      text-align: center;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    @media (max-width: 1080px) {
+      .workspace,
+      .generator-body,
+      .records-section {
+        grid-template-columns: 1fr;
+      }
+
+      .decoder,
+      .generator-body {
+        min-height: auto;
+      }
+
+      .dropzone {
+        min-height: 180px;
+      }
+    }
+
+    @media (max-width: 700px) {
+      main {
+        width: min(100vw - 24px, 640px);
+        padding-top: 22px;
+      }
+
+      .title-row {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      h1 {
+        font-size: 24px;
+      }
+
+      .panel-head,
+      .generator-body,
+      .decoder-body,
+      .record-column {
+        padding-left: 14px;
+        padding-right: 14px;
+      }
+
+      .panel-head {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      textarea {
+        min-height: 238px;
+      }
+
+      .qr-stage {
+        min-height: 290px;
+      }
+
+      .record-column {
+        padding: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="title-row">
+      <h1 data-i18n="appTitle">QR Code Generator and Decoder</h1>
+      <div class="language-control">
+        <label id="languageLabel" for="languageSelect" data-i18n="languageLabel">Language</label>
+        <select id="languageSelect" aria-labelledby="languageLabel">
+          <option value="auto" data-i18n="languageAuto">Auto</option>
+          <option value="en">English</option>
+          <option value="zh-CN">简体中文</option>
+          <option value="zh-TW">繁體中文</option>
+        </select>
+      </div>
+    </div>
+
+    <section class="workspace">
+      <section class="panel generator" aria-labelledby="generatorTitle">
+        <div class="panel-head">
+          <h2 id="generatorTitle" data-i18n="generatorTitle">QR Code Generator</h2>
+          <span id="textMeta" class="meta"></span>
+        </div>
+        <div class="generator-body">
+          <div class="input-column">
+            <label for="textInput" data-i18n="textInputLabel">Enter text</label>
+            <textarea id="textInput" data-i18n-placeholder="textInputPlaceholder" placeholder="Enter text"></textarea>
+            <div class="settings">
+              <div>
+                <label for="sizeSelect" data-i18n="sizeLabel">Size</label>
+                <select id="sizeSelect">
+                  <option value="300">300 x 300 px</option>
+                  <option value="400" selected>400 x 400 px</option>
+                  <option value="600">600 x 600 px</option>
+                  <option value="800">800 x 800 px</option>
+                </select>
+              </div>
+            </div>
+            <div class="actions">
+              <button id="generateBtn" type="button" data-i18n="generateButton">Generate QR Code</button>
+              <button id="clearTextBtn" class="secondary" type="button" data-i18n="clearButton">Clear</button>
+            </div>
+            <div id="generateStatus" class="status"></div>
+          </div>
+
+          <div class="preview-column">
+            <label data-i18n="generatedResultLabel">Generated QR Code</label>
+            <div class="qr-stage">
+              <canvas id="qrCanvas" width="400" height="400"></canvas>
+              <div id="qrEmpty" class="empty" data-i18n="qrEmpty">Waiting to generate</div>
+            </div>
+            <div class="actions">
+              <a id="downloadPng" class="download-link secondary" href="#" download="qrcode.png" aria-disabled="true" data-i18n="downloadImage">Download Image</a>
+              <button id="copyPngBtn" class="secondary" type="button" data-i18n="copyImage">Copy Image</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel decoder" aria-labelledby="decoderTitle">
+        <div class="panel-head">
+          <h2 id="decoderTitle" data-i18n="decoderTitle">QR Code Decoder</h2>
+        </div>
+        <div class="decoder-body">
+          <section class="subpanel">
+            <h3 data-i18n="imageDecodeTitle">Image Decode</h3>
+            <label class="dropzone" id="dropzone" for="fileInput">
+              <input id="fileInput" type="file" accept="image/*" multiple>
+              <span data-i18n="dropzoneText">Choose an image, or drop/paste one</span>
+            </label>
+            <div id="imageStatus" class="status"></div>
+          </section>
+        </div>
+      </section>
+    </section>
+
+    <section class="records-section" data-i18n-aria-label="recordsAriaLabel" aria-label="Records">
+        <section class="panel record-column" aria-labelledby="generationRecordsTitle">
+          <div class="record-head">
+            <h2 id="generationRecordsTitle" data-i18n="generationRecordsTitle">Generation History</h2>
+            <div class="actions">
+              <button id="clearGenerationRecordsBtn" class="secondary" type="button" data-i18n="clearButton">Clear</button>
+            </div>
+          </div>
+          <div id="generationRecordList" class="record-list">
+            <div class="records-empty" data-i18n="noGenerationRecords">No generation history</div>
+          </div>
+        </section>
+
+        <section class="panel record-column" aria-labelledby="decodeRecordsTitle">
+          <div class="record-head">
+            <h2 id="decodeRecordsTitle" data-i18n="decodeRecordsTitle">Decode Results</h2>
+            <div class="actions">
+              <button id="copyAllDecodeBtn" class="secondary" type="button" data-i18n="copyAllButton">Copy All</button>
+              <button id="clearDecodeRecordsBtn" class="secondary" type="button" data-i18n="clearButton">Clear</button>
+            </div>
+          </div>
+          <div id="decodeRecordList" class="record-list">
+            <div class="records-empty" data-i18n="noDecodeRecords">No decode results</div>
+          </div>
+        </section>
+    </section>
+  </main>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script src="vendor/zxing-browser.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
