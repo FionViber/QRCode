@@ -10,6 +10,10 @@ GitHub Pages：
 
 https://fionviber.github.io/XiaoHammerQRCode/
 
+## 介面截圖
+
+![XiaoHammer QR Code 繁體中文介面](assets/screenshots/screenshot-zh-TW.png)
+
 ## 功能
 
 - 根據純文字產生二維碼

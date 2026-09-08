@@ -4,7 +4,7 @@
   const QR_SIZE_DEFAULT = 400;
   const MAX_RECORDS = 100;
   const SVG_NS = "http://www.w3.org/2000/svg";
-  const LANGUAGE_STORAGE_KEY = "localQrToolkitLanguage";
+  const LANGUAGE_STORAGE_KEY = "qrToolLanguage";
   const SUPPORTED_LANGUAGES = ["en", "zh-CN", "zh-TW"];
 
   const translations = {

@@ -10,6 +10,10 @@ GitHub Pages:
 
 https://fionviber.github.io/XiaoHammerQRCode/
 
+## Screenshot
+
+![XiaoHammer QR Code English interface](assets/screenshots/screenshot-en.png)
+
 ## Features
 
 - Generate QR codes from plain text

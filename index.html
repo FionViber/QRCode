@@ -124,6 +124,11 @@
       flex: 0 0 auto;
     }
 
+    .language-icon {
+      font-size: 17px;
+      line-height: 1;
+    }
+
     .language-control label {
       margin: 0;
       color: var(--muted);
@@ -512,6 +517,7 @@
     <div class="title-row">
       <h1 data-i18n="appTitle">QR Code Generator and Decoder</h1>
       <div class="language-control">
+        <span class="language-icon" aria-hidden="true">🌐</span>
         <label id="languageLabel" for="languageSelect" data-i18n="languageLabel">Language</label>
         <select id="languageSelect" aria-labelledby="languageLabel">
           <option value="auto" data-i18n="languageAuto">Auto</option>
