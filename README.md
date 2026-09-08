@@ -35,10 +35,6 @@ You can also host the repository as a static site. No build step is required.
 
 QR generation and image decoding happen in the browser. The page does not upload your text or images to a server. Session records stay in memory and are cleared when the page is closed or refreshed.
 
-## Scope
-
-This project intentionally keeps the local version small. It does not include accounts, cloud history, comments, dynamic QR codes, advanced editing, image URL decoding, templates, styling presets, labels, or admin features.
-
 ## Credits
 
 See [CREDITS.md](CREDITS.md) for open-source library credits and third-party notices.
