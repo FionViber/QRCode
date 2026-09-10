@@ -13,6 +13,9 @@
       appTitle: "QR Code Generator and Decoder",
       languageLabel: "Language",
       languageAuto: "Auto",
+      languageEn: "English",
+      languageZhCN: "Simplified Chinese",
+      languageZhTW: "Traditional Chinese",
       generatorTitle: "QR Code Generator",
       decoderTitle: "QR Code Decoder",
       textInputLabel: "Enter text",
@@ -34,30 +37,47 @@
       noDecodeRecords: "No decode results",
       textMeta: "{chars} characters / {bytes} bytes",
       enterTextError: "Enter text before generating.",
+      enterTextErrorToast: "⚠️ Enter text first",
       generatingStatus: "Generating...",
       generatedStatus: "Generated.",
       generationFailed: "Failed to generate.",
-      noQrToCopy: "No QR code to copy",
-      imageCopied: "Image copied",
-      imageDataUrlCopied: "Image Data URL copied",
-      clipboardUnavailable: "Clipboard permission is not available",
-      noQrToDownload: "No QR code to download",
+      generatedToast: "✨ QR code generated",
+      generationFailedToast: "⚠️ QR code generation failed",
+      textClearedToast: "🧹 Text cleared",
+      noQrToCopy: "⚠️ No QR code to copy",
+      imageCopied: "✅ Image copied",
+      imageDataUrlCopied: "✅ Image Data URL copied",
+      clipboardUnavailable: "⚠️ Clipboard permission unavailable",
+      noQrToDownload: "⚠️ No QR code to download",
+      downloadImageDoneToast: "⬇️ Image downloaded",
       noSupportedImage: "No supported image found.",
       decodingImages: "Decoding {count} image(s)...",
       decodeSuccess: "Done: {success}/{total} image(s) decoded.",
       decodeFailure: "No QR code found.",
+      noSupportedImageToast: "⚠️ No supported image found",
+      decodeSuccessToast: "✅ Decoded {success}/{total} image(s)",
+      decodeFailureToast: "⚠️ No QR code found",
       libraryLoadError: "zxing-browser.min.js failed to load.",
       imageReadError: "The image could not be read.",
       copyButton: "Copy",
-      textCopied: "Copied",
+      textCopied: "✅ Copied",
+      allDecodeCopied: "✅ Decode results copied",
+      noDecodeRecordsToast: "⚠️ No decode results to copy",
+      generationRecordsClearedToast: "🧹 Generation history cleared",
+      decodeRecordsClearedToast: "🧹 Decode results cleared",
       regenerateButton: "Make QR Code",
       openButton: "Open",
+      openLinkToast: "🔗 Opening link",
+      languageChangedToast: "🌐 Language updated",
     },
     "zh-CN": {
       documentTitle: "二维码工具",
       appTitle: "二维码生成及解码工具",
       languageLabel: "语言",
       languageAuto: "自动",
+      languageEn: "English",
+      languageZhCN: "简体中文",
+      languageZhTW: "繁體中文",
       generatorTitle: "二维码生成",
       decoderTitle: "二维码解码",
       textInputLabel: "请输入文字",
@@ -79,30 +99,47 @@
       noDecodeRecords: "暂无解码结果",
       textMeta: "{chars} 字符 / {bytes} 字节",
       enterTextError: "请输入文字后再生成。",
+      enterTextErrorToast: "⚠️ 请先输入文字",
       generatingStatus: "正在生成...",
       generatedStatus: "已生成。",
       generationFailed: "生成失败。",
-      noQrToCopy: "当前没有可复制的二维码",
-      imageCopied: "已复制图片",
-      imageDataUrlCopied: "已复制图片 Data URL",
-      clipboardUnavailable: "浏览器没有开放剪贴板权限",
-      noQrToDownload: "当前没有可下载的二维码",
+      generatedToast: "✨ 二维码已生成",
+      generationFailedToast: "⚠️ 二维码生成失败",
+      textClearedToast: "🧹 文字已清空",
+      noQrToCopy: "⚠️ 当前没有可复制的二维码",
+      imageCopied: "✅ 图片已复制",
+      imageDataUrlCopied: "✅ 图片 Data URL 已复制",
+      clipboardUnavailable: "⚠️ 剪贴板权限不可用",
+      noQrToDownload: "⚠️ 当前没有可下载的二维码",
+      downloadImageDoneToast: "⬇️ 图片已下载",
       noSupportedImage: "没有可识别的图片。",
       decodingImages: "正在解码 {count} 张图片...",
       decodeSuccess: "完成：{success}/{total} 张识别成功。",
       decodeFailure: "没有识别到二维码。",
+      noSupportedImageToast: "⚠️ 没有可识别的图片",
+      decodeSuccessToast: "✅ 已解码 {success}/{total} 张图片",
+      decodeFailureToast: "⚠️ 没有识别到二维码",
       libraryLoadError: "zxing-browser.min.js 未加载。",
       imageReadError: "图片无法读取。",
       copyButton: "复制",
-      textCopied: "已复制",
+      textCopied: "✅ 已复制",
+      allDecodeCopied: "✅ 解码结果已复制",
+      noDecodeRecordsToast: "⚠️ 没有可复制的解码结果",
+      generationRecordsClearedToast: "🧹 生成记录已清空",
+      decodeRecordsClearedToast: "🧹 解码结果已清空",
       regenerateButton: "转成二维码",
       openButton: "打开",
+      openLinkToast: "🔗 正在打开链接",
+      languageChangedToast: "🌐 语言已切换",
     },
     "zh-TW": {
       documentTitle: "二維碼工具",
       appTitle: "二維碼產生及解碼工具",
       languageLabel: "語言",
       languageAuto: "自動",
+      languageEn: "English",
+      languageZhCN: "简体中文",
+      languageZhTW: "繁體中文",
       generatorTitle: "二維碼產生",
       decoderTitle: "二維碼解碼",
       textInputLabel: "請輸入文字",
@@ -124,24 +161,38 @@
       noDecodeRecords: "暫無解碼結果",
       textMeta: "{chars} 字元 / {bytes} 位元組",
       enterTextError: "請輸入文字後再產生。",
+      enterTextErrorToast: "⚠️ 請先輸入文字",
       generatingStatus: "正在產生...",
       generatedStatus: "已產生。",
       generationFailed: "產生失敗。",
-      noQrToCopy: "目前沒有可複製的二維碼",
-      imageCopied: "已複製圖片",
-      imageDataUrlCopied: "已複製圖片 Data URL",
-      clipboardUnavailable: "瀏覽器未開放剪貼簿權限",
-      noQrToDownload: "目前沒有可下載的二維碼",
+      generatedToast: "✨ 二維碼已產生",
+      generationFailedToast: "⚠️ 二維碼產生失敗",
+      textClearedToast: "🧹 文字已清空",
+      noQrToCopy: "⚠️ 目前沒有可複製的二維碼",
+      imageCopied: "✅ 圖片已複製",
+      imageDataUrlCopied: "✅ 圖片 Data URL 已複製",
+      clipboardUnavailable: "⚠️ 剪貼簿權限不可用",
+      noQrToDownload: "⚠️ 目前沒有可下載的二維碼",
+      downloadImageDoneToast: "⬇️ 圖片已下載",
       noSupportedImage: "沒有可辨識的圖片。",
       decodingImages: "正在解碼 {count} 張圖片...",
       decodeSuccess: "完成：{success}/{total} 張辨識成功。",
       decodeFailure: "沒有辨識到二維碼。",
+      noSupportedImageToast: "⚠️ 沒有可辨識的圖片",
+      decodeSuccessToast: "✅ 已解碼 {success}/{total} 張圖片",
+      decodeFailureToast: "⚠️ 沒有辨識到二維碼",
       libraryLoadError: "zxing-browser.min.js 未載入。",
       imageReadError: "圖片無法讀取。",
       copyButton: "複製",
-      textCopied: "已複製",
+      textCopied: "✅ 已複製",
+      allDecodeCopied: "✅ 解碼結果已複製",
+      noDecodeRecordsToast: "⚠️ 沒有可複製的解碼結果",
+      generationRecordsClearedToast: "🧹 產生記錄已清空",
+      decodeRecordsClearedToast: "🧹 解碼結果已清空",
       regenerateButton: "轉成二維碼",
       openButton: "開啟",
+      openLinkToast: "🔗 正在開啟連結",
+      languageChangedToast: "🌐 語言已切換",
     },
   };
 
@@ -268,7 +319,20 @@
       node.setAttribute("aria-label", t(node.dataset.i18nAriaLabel));
     });
 
-    els.languageSelect.value = state.languageMode;
+    if (els.languageSelect) {
+      els.languageSelect.value = state.languageMode;
+      els.languageSelect.setAttribute("aria-label", t("languageLabel"));
+      for (const option of els.languageSelect.options) {
+        const key = option.value === "auto"
+          ? "languageAuto"
+          : option.value === "en"
+            ? "languageEn"
+            : option.value === "zh-CN"
+              ? "languageZhCN"
+              : "languageZhTW";
+        option.textContent = t(key);
+      }
+    }
   }
 
   function refreshStatuses() {
@@ -304,6 +368,7 @@
   }
 
   function showToast(key, params) {
+    if (!els.toast) return;
     window.clearTimeout(showToast.timer);
     els.toast.textContent = t(key, params);
     els.toast.classList.add("show");
@@ -421,6 +486,7 @@
       openLink.target = "_blank";
       openLink.rel = "noreferrer";
       openLink.textContent = t("openButton");
+      openLink.addEventListener("click", () => showToast("openLinkToast"));
       actions.appendChild(openLink);
     }
 
@@ -466,6 +532,7 @@
     if (!text) {
       setQrEmpty();
       setStatus(els.generateStatus, "enterTextError", "error");
+      showToast("enterTextErrorToast");
       return;
     }
 
@@ -509,9 +576,11 @@
       addRecord(state.generationRecords, text);
       renderGenerationRecords();
       setStatus(els.generateStatus, "generatedStatus", "good");
+      showToast("generatedToast");
     } catch (error) {
       setQrEmpty();
       setStatus(els.generateStatus, "generationFailed", "error");
+      showToast("generationFailedToast");
     } finally {
       els.generateBtn.disabled = false;
     }
@@ -538,10 +607,10 @@
     }
   }
 
-  async function copyText(text) {
+  async function copyText(text, successKey = "textCopied") {
     try {
       await navigator.clipboard.writeText(text);
-      showToast("textCopied");
+      showToast(successKey);
     } catch (error) {
       showToast("clipboardUnavailable");
     }
@@ -578,6 +647,7 @@
     const imageFiles = Array.from(fileList || []).filter((file) => file.type.startsWith("image/"));
     if (!imageFiles.length) {
       setStatus(els.imageStatus, "noSupportedImage", "error");
+      showToast("noSupportedImageToast");
       return;
     }
 
@@ -597,8 +667,13 @@
         success,
         total: imageFiles.length,
       });
+      showToast("decodeSuccessToast", {
+        success,
+        total: imageFiles.length,
+      });
     } else {
       setStatus(els.imageStatus, "decodeFailure", "error");
+      showToast("decodeFailureToast");
     }
   }
 
@@ -607,6 +682,7 @@
       const nextLanguageMode = els.languageSelect.value;
       setStoredLanguageMode(nextLanguageMode);
       applyLanguage(nextLanguageMode);
+      showToast("languageChangedToast");
     });
     els.textInput.addEventListener("input", updateTextMeta);
     els.textInput.addEventListener("keydown", (event) => {
@@ -624,6 +700,7 @@
       setQrEmpty();
       setStatus(els.generateStatus, "");
       els.textInput.focus();
+      showToast("textClearedToast");
     });
     els.copyPngBtn.addEventListener("click", copyGeneratedPng);
     [els.downloadPng].forEach((link) => {
@@ -631,7 +708,9 @@
         if (link.getAttribute("aria-disabled") === "true") {
           event.preventDefault();
           showToast("noQrToDownload");
+          return;
         }
+        showToast("downloadImageDoneToast");
       });
     });
 
@@ -656,17 +735,19 @@
     els.clearGenerationRecordsBtn.addEventListener("click", () => {
       state.generationRecords.length = 0;
       renderGenerationRecords();
+      showToast("generationRecordsClearedToast");
     });
     els.clearDecodeRecordsBtn.addEventListener("click", () => {
       state.decodeRecords.length = 0;
       renderDecodeRecords();
+      showToast("decodeRecordsClearedToast");
     });
     els.copyAllDecodeBtn.addEventListener("click", () => {
       if (!state.decodeRecords.length) {
-        showToast("noDecodeRecords");
+        showToast("noDecodeRecordsToast");
         return;
       }
-      copyText(state.decodeRecords.map((item) => item.text).join("\n"));
+      copyText(state.decodeRecords.map((item) => item.text).join("\n"), "allDecodeCopied");
     });
   }
 
