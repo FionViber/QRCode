@@ -452,6 +452,32 @@
       padding: 14px;
     }
 
+    .site-footer {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 18px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .footer-link {
+      color: var(--primary);
+      font-weight: 650;
+      text-decoration: none;
+    }
+
+    .footer-link:hover {
+      color: var(--primary-dark);
+      text-decoration: underline;
+    }
+
+    .footer-separator {
+      color: #a5aca1;
+    }
+
     .toast {
       position: fixed;
       z-index: 20;
@@ -538,6 +564,10 @@
 
       .record-column {
         padding: 12px;
+      }
+
+      .site-footer {
+        flex-wrap: wrap;
       }
     }
   </style>
@@ -643,6 +673,13 @@
           </div>
         </section>
     </section>
+
+    <footer class="site-footer">
+      <a class="footer-link" href="https://github.com/FionViber/XiaoHammerQRCode" target="_blank" rel="noopener" data-i18n="githubLink">GitHub Project</a>
+      <span class="footer-separator" aria-hidden="true">·</span>
+      <span data-i18n="creditLabel">Credit</span>
+      <a class="footer-link" href="https://github.com/FionViber" target="_blank" rel="noopener">FionViber</a>
+    </footer>
   </main>
 
   <div id="toast" class="toast" role="status" aria-live="polite" aria-atomic="true"></div>
