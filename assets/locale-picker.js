@@ -1,9 +1,9 @@
 /* Square locale switch. Icons from Tabler Icons, MIT (see LICENSE). */
 (() => {
-  const icons = {"world": "<svg class=\"nav-icon\" aria-hidden=\"true\" focusable=\"false\" width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0\" />\n  <path d=\"M3.6 9h16.8\" />\n  <path d=\"M3.6 15h16.8\" />\n  <path d=\"M11.5 3a17 17 0 0 0 0 18\" />\n  <path d=\"M12.5 3a17 17 0 0 1 0 18\" /></svg>", "chevron": "<svg class=\"nav-icon\" aria-hidden=\"true\" focusable=\"false\" width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M6 9l6 6l6 -6\" /></svg>", "check": "<svg class=\"nav-icon\" aria-hidden=\"true\" focusable=\"false\" width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M5 12l5 5l10 -10\" /></svg>"};
+  const icons = {"world": "<svg class=\"nav-icon\" aria-hidden=\"true\" focusable=\"false\" width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0\" />\n  <path d=\"M3.6 9h16.8\" />\n  <path d=\"M3.6 15h16.8\" />\n  <path d=\"M11.5 3a17 17 0 0 0 0 18\" />\n  <path d=\"M12.5 3a17 17 0 0 1 0 18\" /></svg>", "chevron": "<svg class=\"nav-icon\" aria-hidden=\"true\" focusable=\"false\" width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M6 9l6 6l6 -6\" /></svg>", "check": "<svg class=\"nav-icon\" aria-hidden=\"true\" focusable=\"false\" width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M5 12l5 5l10 -10\" /></svg>", "sort": "<svg class=\"nav-icon\" aria-hidden=\"true\" focusable=\"false\" width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M4 10a2 2 0 1 0 4 0a2 2 0 0 0 -4 0\" />\n  <path d=\"M6 4v4\" />\n  <path d=\"M6 12v8\" />\n  <path d=\"M10 16a2 2 0 1 0 4 0a2 2 0 0 0 -4 0\" />\n  <path d=\"M12 4v10\" />\n  <path d=\"M12 18v2\" />\n  <path d=\"M16 7a2 2 0 1 0 4 0a2 2 0 0 0 -4 0\" />\n  <path d=\"M18 4v1\" />\n  <path d=\"M18 9v11\" /></svg>"};
   let serial = 0;
 
-  function attach(select, readName) {
+  function attach(select, readName, symbol = "world") {
     const group = document.createElement("span");
     group.className = "asq-picker";
     const trigger = document.createElement("button");
@@ -11,7 +11,7 @@
     trigger.className = "asq-picker-trigger";
     trigger.setAttribute("aria-haspopup", "menu");
     const valueLabel = document.createElement("span");
-    trigger.insertAdjacentHTML("beforeend", icons.world);
+    trigger.insertAdjacentHTML("beforeend", icons[symbol] || icons.world);
     trigger.append(valueLabel);
     trigger.insertAdjacentHTML("beforeend", icons.chevron);
     const menu = document.createElement("span");
@@ -21,7 +21,10 @@
     menu.hidden = true;
     trigger.setAttribute("aria-controls", menu.id);
     trigger.setAttribute("aria-expanded", "false");
-    const options = [...select.options].map(option => {
+    let options = [];
+    function rebuild() {
+      menu.replaceChildren();
+options = [...select.options].map(option => {
       const item = document.createElement("button");
       item.type = "button";
       item.tabIndex = -1;
@@ -41,8 +44,10 @@
       menu.append(item);
       return { option, item, caption };
     });
+    }
 
     function sync() {
+      if (select.options.length !== options.length || options.some((entry,i) => entry.option !== select.options[i])) rebuild();
       const selected = select.selectedOptions[0];
       const name = readName() || select.getAttribute("aria-label") || "Language";
       valueLabel.textContent = selected?.textContent || "";
@@ -69,6 +74,7 @@
       const choice = target === "first" ? active[0] : target === "last" ? active.at(-1) :
         active.find(row => row.option.selected) || active[0];
       choice?.item.focus({ preventScroll: true });
+      if (choice && menu.scrollHeight > menu.clientHeight) menu.scrollTop = Math.max(0, choice.item.offsetTop - menu.clientHeight / 2);
     }
     let prefix = "", typedAt = 0;
     function close(restore = false) {
@@ -108,6 +114,7 @@
     document.addEventListener("pointerdown", e=>{ if (!menu.hidden && !group.contains(e.target)) close(); });
     group.addEventListener("focusout", e=>{ if (!menu.hidden && !group.contains(e.relatedTarget)) close(); });
     select.addEventListener("change", sync);
+    new MutationObserver(sync).observe(select,{childList:true,subtree:true,attributes:true,attributeFilter:["disabled","label"]});
     group.append(trigger, menu);
     select.after(group);
     select.hidden = true;
@@ -122,4 +129,11 @@
   const select = document.getElementById("languageSelect");
   const sync = ASQLocale.attach(select, () => document.getElementById("asq-lang-name").textContent);
   new MutationObserver(sync).observe(select, {subtree:true,childList:true,characterData:true});
+}
+
+{
+ const size=document.getElementById("sizeSelect");
+ const caption=document.querySelector('label[for="sizeSelect"]');
+ const sync=ASQLocale.attach(size,()=>caption.textContent,"sort");
+ new MutationObserver(sync).observe(caption,{childList:true,characterData:true,subtree:true});
 }
