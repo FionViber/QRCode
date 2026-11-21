@@ -9,7 +9,7 @@
 
   const translations = {
     en: {
-      documentTitle: "QR Code Tool",
+      documentTitle: "QR Code",
       appTitle: "QR Code",
       languageLabel: "Language",
       languageAuto: "Auto",
@@ -73,8 +73,8 @@
       languageChangedToast: "🌐 Language updated",
     },
     "zh-CN": {
-      documentTitle: "二维码工具",
-      appTitle: "二维码生成及解码工具",
+      documentTitle: "二维码",
+      appTitle: "二维码",
       languageLabel: "语言",
       languageAuto: "自动",
       languageEn: "English",
@@ -137,8 +137,8 @@
       languageChangedToast: "🌐 语言已切换",
     },
     "zh-TW": {
-      documentTitle: "二維碼工具",
-      appTitle: "二維碼產生及解碼工具",
+      documentTitle: "QR Code",
+      appTitle: "QR Code",
       languageLabel: "語言",
       languageAuto: "自動",
       languageEn: "English",
