@@ -5,21 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>QR Code</title>
   <link rel="stylesheet" href="assets/fionviber-tool.css">
+  <link rel="stylesheet" href="assets/locale.css">
 </head>
 <body>
   <main>
     <div class="title-row">
       <h1 data-i18n="appTitle">QR Code</h1>
-      <label class="language-picker" for="languageSelect">
-        <img class="language-icon" src="assets/world.svg" alt="">
-        <span id="languageLabel" class="sr-only" data-i18n="languageLabel">Language</span>
-        <select id="languageSelect" aria-labelledby="languageLabel">
+      <div class="asq-locale-field"><span class="sr-only" id="asq-lang-name" data-i18n="languageLabel">Language</span><select aria-labelledby="asq-lang-name" id="languageSelect">
           <option value="auto">Auto</option>
           <option value="en">English</option>
           <option value="zh-CN">Simplified Chinese</option>
           <option value="zh-TW">Traditional Chinese</option>
-        </select>
-      </label>
+        </select></div>
     </div>
 
     <section class="workspace">
