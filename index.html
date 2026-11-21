@@ -10,7 +10,7 @@
 <body>
   <main>
     <div class="title-row">
-      <h1 data-i18n="appTitle">QR Code</h1>
+      <h1 id="tool-title" data-i18n="appTitle">QR Code</h1>
       <div class="asq-locale-field"><span class="sr-only" id="asq-lang-name" data-i18n="languageLabel">Language</span><select aria-labelledby="asq-lang-name" id="languageSelect">
           <option value="auto">Auto</option>
           <option value="en">English</option>
@@ -19,10 +19,14 @@
         </select></div>
     </div>
 
+    <nav class="work-links" aria-labelledby="tool-title">
+      <a href="#generatorTitle" data-i18n="generatorTitle">QR Code Generator</a>
+      <a href="#decoderTitle" data-i18n="decoderTitle">QR Code Decoder</a>
+    </nav>
     <section class="workspace">
       <section class="panel generator" aria-labelledby="generatorTitle">
         <div class="panel-head">
-          <h2 id="generatorTitle" data-i18n="generatorTitle">QR Code Generator</h2>
+          <h2 id="generatorTitle" tabindex="-1" data-i18n="generatorTitle">QR Code Generator</h2>
           <span id="textMeta" class="meta"></span>
         </div>
         <div class="generator-body">
@@ -63,7 +67,7 @@
 
       <section class="panel decoder" aria-labelledby="decoderTitle">
         <div class="panel-head">
-          <h2 id="decoderTitle" data-i18n="decoderTitle">QR Code Decoder</h2>
+          <h2 id="decoderTitle" tabindex="-1" data-i18n="decoderTitle">QR Code Decoder</h2>
         </div>
         <div class="decoder-body">
           <section class="subpanel">
