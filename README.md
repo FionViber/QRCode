@@ -1,4 +1,4 @@
-# XiaoHammer QR Code
+# QR Code
 
 [English](README.md) | [简体中文](README.zh-CN.md) | [繁體中文](README.zh-TW.md)
 
@@ -8,11 +8,11 @@ A fully offline browser-based QR code generator and image decoder. It generates 
 
 GitHub Pages:
 
-https://fionviber.github.io/XiaoHammerQRCode/
+https://fionviber.github.io/QRCode/
 
 ## Screenshot
 
-![XiaoHammer QR Code English interface](assets/screenshots/screenshot-en.png)
+![QR Code English interface](assets/screenshots/screenshot-en.png)
 
 ## Features
 

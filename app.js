@@ -10,7 +10,7 @@
   const translations = {
     en: {
       documentTitle: "QR Code Tool",
-      appTitle: "QR Code Generator and Decoder",
+      appTitle: "QR Code",
       languageLabel: "Language",
       languageAuto: "Auto",
       languageEn: "English",
