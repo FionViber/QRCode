@@ -129,6 +129,12 @@ h3 {
   white-space: nowrap;
   flex: 0 0 auto;
 }
+.language-icon { width:18px; height:18px; display:block; }
+.locale-button { display:inline-flex; min-height:44px; align-items:center; gap:6px; border:1px solid var(--line); border-radius:0; background:var(--panel); color:var(--text); font:inherit; }
+.locale-button img { width:18px; height:18px; }
+.locale-menu { position:absolute; z-index:5; margin-top:2px; border:1px solid var(--line); background:var(--panel); }
+.locale-option { display:block; width:100%; min-height:44px; padding:8px 12px; border:0; background:var(--panel); color:var(--text); text-align:start; }
+.locale-option:hover,.locale-option[aria-selected="true"] { background:var(--wash); }
 
 .language-icon {
   font-size: 16px;
