@@ -1,4 +1,4 @@
-# XiaoHammer QR Code
+# QR Code
 
 [English](README.md) | [简体中文](README.zh-CN.md) | [繁體中文](README.zh-TW.md)
 
@@ -8,11 +8,11 @@
 
 GitHub Pages：
 
-https://fionviber.github.io/XiaoHammerQRCode/
+https://fionviber.github.io/QRCode/
 
 ## 界面截图
 
-![XiaoHammer QR Code 简体中文界面](assets/screenshots/screenshot-zh-CN.png)
+![QR Code 简体中文界面](assets/screenshots/screenshot-zh-CN.png)
 
 ## 功能
 
