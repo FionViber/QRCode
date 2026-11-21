@@ -52,6 +52,8 @@ main {
   padding: 28px 0 34px;
 }
 
+.work-links { display: none; }
+
 .title-row {
   display: flex;
   align-items: center;
@@ -494,6 +496,10 @@ input[type="file"] {
 }
 
 @media (max-width: 1080px) {
+  .work-links { display: flex; flex-wrap: wrap; gap: 1px; margin-block-end: 16px; background: var(--line); border: 1px solid var(--line); }
+  .work-links a { flex: 1 1 8rem; display: grid; place-items: center; min-height: 44px; padding: 6px 10px; background: var(--panel); color: var(--primary); text-align: center; font-size: 14px; font-weight: 650; text-underline-offset: .2em; }
+  .panel-head h2 { scroll-margin-block-start: 1rem; }
+
   .workspace,
   .generator-body,
   .records-section {
@@ -517,8 +523,8 @@ input[type="file"] {
   }
 
   .title-row {
-    align-items: flex-start;
-    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 8px 12px;
   }
 
   h1 {
@@ -539,7 +545,7 @@ input[type="file"] {
   }
 
   textarea {
-    min-height: 238px;
+    min-height: clamp(7rem, 18svh, 10rem);
   }
 
   .qr-stage {
