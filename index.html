@@ -31,28 +31,26 @@
         </div>
         <div class="generator-body">
           <div class="input-column">
-            <label for="textInput" data-i18n="textInputLabel">Enter text</label>
+            <label class="field-label" for="textInput" data-i18n="textInputLabel">Enter text</label>
             <textarea id="textInput" data-i18n-placeholder="textInputPlaceholder" placeholder="Enter text"></textarea>
-            <div class="settings">
-              <div>
-                <label for="sizeSelect" data-i18n="sizeLabel">Size</label>
-                <select id="sizeSelect">
-                  <option value="300">300 x 300 px</option>
-                  <option value="400" selected>400 x 400 px</option>
-                  <option value="600">600 x 600 px</option>
-                  <option value="800">800 x 800 px</option>
-                </select>
-              </div>
-            </div>
-            <div class="actions">
+            <div class="actions generate-actions">
+              <label class="sr-only" for="sizeSelect" data-i18n="sizeLabel">Size</label>
+              <select id="sizeSelect">
+                <option value="300">300 px</option>
+                <option value="400" selected>400 px</option>
+                <option value="600">600 px</option>
+                <option value="800">800 px</option>
+              </select>
               <button id="generateBtn" type="button" data-i18n="generateButton">Generate QR Code</button>
-              <button id="clearTextBtn" class="secondary" type="button" data-i18n="clearButton">Clear</button>
+              <button id="clearTextBtn" class="secondary clear-text" type="button" aria-label="Clear text" title="Clear text" data-i18n-aria-label="clearTextLabel" data-i18n-title="clearTextLabel">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false"><path d="m6 6 12 12M18 6 6 18"/></svg>
+              </button>
             </div>
             <div id="generateStatus" class="status"></div>
           </div>
 
           <div class="preview-column">
-            <label data-i18n="generatedResultLabel">Generated QR Code</label>
+            <span class="field-label" data-i18n="generatedResultLabel">Generated QR Code</span>
             <div class="qr-stage">
               <canvas id="qrCanvas" width="400" height="400"></canvas>
               <div id="qrEmpty" class="empty" data-i18n="qrEmpty">Waiting to generate</div>
@@ -70,14 +68,14 @@
           <h2 id="decoderTitle" tabindex="-1" data-i18n="decoderTitle">QR Code Decoder</h2>
         </div>
         <div class="decoder-body">
-          <section class="subpanel">
-            <h3 data-i18n="imageDecodeTitle">Image Decode</h3>
-            <label class="dropzone" id="dropzone" for="fileInput">
-              <input id="fileInput" type="file" accept="image/*" multiple>
-              <span data-i18n="dropzoneText">Choose an image, or drop/paste one</span>
-            </label>
-            <div id="imageStatus" class="status"></div>
-          </section>
+          <label class="dropzone" id="dropzone" for="fileInput">
+            <input class="sr-only" id="fileInput" type="file" accept="image/*" multiple>
+            <span data-i18n="dropzoneText">Choose an image, or drop/paste one</span>
+          </label>
+          <div class="actions">
+            <button id="pasteImageBtn" type="button" data-i18n="pasteImage">Paste Image</button>
+          </div>
+          <div id="imageStatus" role="status" class="status"></div>
         </div>
       </section>
     </section>
