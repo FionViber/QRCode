@@ -504,8 +504,8 @@ button:disabled,
 
 @media (max-width: 380px) {
   .generate-actions { gap: 4px; }
-  .generate-actions > button:not(.clear-text), .generate-actions .asq-picker-trigger { padding-inline: 7px; font-size: 13px; }
-  button.clear-text { width: 38px; }
+  .generate-actions > button:not(.clear-text) { padding-inline: 7px; font-size: 13px; }
+  .generate-actions .asq-picker .asq-picker-trigger { gap: 4px; padding-inline: 5px; font-size: 13px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
