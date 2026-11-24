@@ -27,7 +27,10 @@
       qrEmpty: "Waiting to generate",
       downloadImage: "Download Image",
       copyImage: "Copy Image",
-      imageDecodeTitle: "Image Decode",
+      pasteImage: "Paste Image",
+      clearTextLabel: "Clear text",
+      clipboardEmpty: "No image on the clipboard.",
+      clipboardHelp: "Use the browser’s Paste command (Ctrl+V or ⌘V), or choose an image.",
       dropzoneText: "Choose an image, or drop/paste one",
       recordsAriaLabel: "Records",
       generationRecordsTitle: "Generation History",
@@ -91,7 +94,10 @@
       qrEmpty: "等待生成",
       downloadImage: "下载图片",
       copyImage: "复制图片",
-      imageDecodeTitle: "图片解码",
+      pasteImage: "粘贴图片",
+      clearTextLabel: "清空文字",
+      clipboardEmpty: "剪贴板中没有图片。",
+      clipboardHelp: "请使用系统粘贴命令（Ctrl+V 或 ⌘V），或选择图片。",
       dropzoneText: "选择图片，或拖拽/粘贴图片",
       recordsAriaLabel: "记录",
       generationRecordsTitle: "生成记录",
@@ -155,7 +161,10 @@
       qrEmpty: "等待產生",
       downloadImage: "下載圖片",
       copyImage: "複製圖片",
-      imageDecodeTitle: "圖片解碼",
+      pasteImage: "貼上圖片",
+      clearTextLabel: "清空文字",
+      clipboardEmpty: "剪貼簿中沒有圖片。",
+      clipboardHelp: "請使用系統貼上指令（Ctrl+V 或 ⌘V），或選擇圖片。",
       dropzoneText: "選擇圖片，或拖曳/貼上圖片",
       recordsAriaLabel: "記錄",
       generationRecordsTitle: "產生記錄",
@@ -220,6 +229,7 @@
     qrEmpty: document.getElementById("qrEmpty"),
     downloadPng: document.getElementById("downloadPng"),
     copyPngBtn: document.getElementById("copyPngBtn"),
+    pasteImageBtn: document.getElementById("pasteImageBtn"),
     fileInput: document.getElementById("fileInput"),
     dropzone: document.getElementById("dropzone"),
     imageStatus: document.getElementById("imageStatus"),
@@ -323,6 +333,10 @@
     });
     document.querySelectorAll("[data-i18n-aria-label]").forEach((node) => {
       node.setAttribute("aria-label", t(node.dataset.i18nAriaLabel));
+    });
+
+    document.querySelectorAll("[data-i18n-title]").forEach((node) => {
+      node.title = t(node.dataset.i18nTitle);
     });
 
     if (els.languageSelect) {
@@ -683,6 +697,29 @@
     }
   }
 
+  async function pasteImage() {
+    if (!navigator.clipboard?.read) {
+      setStatus(els.imageStatus, "clipboardHelp", "error");
+      return;
+    }
+    els.pasteImageBtn.disabled = true;
+    try {
+      const [item] = await navigator.clipboard.read();
+      const types = item?.types || [];
+      const type = types.includes("image/png") ? "image/png" : types.find((value) => value.startsWith("image/"));
+      if (!type) {
+        setStatus(els.imageStatus, "clipboardEmpty", "error");
+        return;
+      }
+      const image = await item.getType(type);
+      await decodeFiles([image]);
+    } catch {
+      setStatus(els.imageStatus, "clipboardHelp", "error");
+    } finally {
+      els.pasteImageBtn.disabled = false;
+    }
+  }
+
   function bindEvents() {
     els.languageSelect.addEventListener("change", () => {
       const nextLanguageMode = els.languageSelect.value;
@@ -720,7 +757,12 @@
       });
     });
 
-    els.fileInput.addEventListener("change", () => decodeFiles(els.fileInput.files));
+    els.pasteImageBtn.addEventListener("click", pasteImage);
+    els.fileInput.addEventListener("change", () => {
+      const files = Array.from(els.fileInput.files);
+      els.fileInput.value = "";
+      decodeFiles(files);
+    });
     els.dropzone.addEventListener("dragover", (event) => {
       event.preventDefault();
       els.dropzone.classList.add("active");
@@ -734,8 +776,11 @@
       decodeFiles(event.dataTransfer.files);
     });
     document.addEventListener("paste", (event) => {
-      const files = Array.from(event.clipboardData.files || []).filter((file) => file.type.startsWith("image/"));
-      if (files.length) decodeFiles(files);
+      const file = event.clipboardData?.files[0];
+      if (file?.type.startsWith("image/")) {
+        event.preventDefault();
+        decodeFiles([file]);
+      }
     });
 
     els.clearGenerationRecordsBtn.addEventListener("click", () => {
